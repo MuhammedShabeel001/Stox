@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stox/view_model/custom_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,9 +7,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('Homepage'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(180),
+        child: SappBar(),
       ),
+      body: Center(),
     );
   }
 }

@@ -28,12 +28,12 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: FlashyTabBar(
         items: [
           FlashyTabBarItem(
-            icon: FaIcon(FontAwesomeIcons.house),
-            title: Text('Home'),
+            icon: const FaIcon(FontAwesomeIcons.house),
+            title: const Text('Home'),
           ),
           FlashyTabBarItem(
-            icon: FaIcon(FontAwesomeIcons.clipboardList),
-            title: Text('Wishlist'),
+            icon: const FaIcon(FontAwesomeIcons.clipboardList),
+            title: const Text('Wishlist'),
           ),
         ],
         onItemSelected: _onTapped,
