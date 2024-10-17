@@ -81,11 +81,7 @@ class WatchlistScreen extends StatelessWidget {
                                           Icon(Icons.delete, color: Colors.red),
                                       onPressed: () {
                                         provider.removeStock(stock.symbol);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackBar(
-                                          content: Text(
-                                              '${stock.name} removed from Watchlist'),
-                                        ));
+                                        
                                       },
                                     ),
                                   // Expand button

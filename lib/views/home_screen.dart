@@ -239,12 +239,7 @@ class HomeScreen extends StatelessWidget {
                                     Provider.of<WatchlistProvider>(context,
                                             listen: false)
                                         .addStock(stock);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                            '${stock.name} added to Watchlist'),
-                                      ),
-                                    );
+                                   
                                   },
                                   icon: const FaIcon(
                                     FontAwesomeIcons.plus,
