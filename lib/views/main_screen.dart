@@ -15,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
-  final List<Widget> _screens = [const HomeScreen(),  WatchlistScreen()];
+  final List<Widget> _screens = [ HomeScreen(),  WatchlistScreen()];
 
   void _onTapped(int index) {
     setState(() {
@@ -70,7 +70,9 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ],
-        onItemSelected: _onTapped,
+        onItemSelected: (value) {
+          
+        },
         selectedIndex: _selectedIndex,
         showElevation: false,
       ),
