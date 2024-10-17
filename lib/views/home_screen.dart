@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stox/view_model/custom_appbar.dart';
+import 'package:stox/widgets/custom_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
