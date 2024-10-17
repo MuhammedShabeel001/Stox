@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:stox/provider/watchlist_provider.dart';
-// import '../models/stock_model.dart';  // Ensure Stock model is imported
+import 'package:stox/widgets/loader_animation.dart';
 
 class WatchlistScreen extends StatelessWidget {
-   WatchlistScreen({super.key});
+  WatchlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +28,7 @@ class WatchlistScreen extends StatelessWidget {
             final watchlist = provider.watchlist;
 
             if (watchlist.isEmpty) {
-              return Center(
-                child: Text(
-                  'Your watchlist is empty.',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey[600],
-                  ),
-                ),
-              );
+              return LoaderAnimation(animation: 'assets/Animation3.json');
             }
 
             return ListView.builder(
@@ -63,30 +54,53 @@ class WatchlistScreen extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    stock.name,  // Display the stock name
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                                  SizedBox(
+                                    width: 250,
+                                    child: Text(
+                                      overflow: TextOverflow.ellipsis,
+                                      stock.name, // Display the stock name
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                   Text(
-                                    'Type: ${stock.type}',  // Display stock type
+                                    'Type: ${stock.type}', // Display stock type
                                     style: TextStyle(color: Colors.grey[600]),
                                   ),
                                 ],
                               ),
-                              IconButton(
-                                icon: Icon(
-                                  provider.isExpanded(index)
-                                      ? Icons.expand_less
-                                      : Icons.expand_more,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                                onPressed: () {
-                                  provider.toggleExpansion(index); // Toggle expansion
-                                },
+                              Row(
+                                children: [
+                                  // Delete button visible only when stock is not expanded
+                                  if (!provider.isExpanded(index))
+                                    IconButton(
+                                      icon:
+                                          Icon(Icons.delete, color: Colors.red),
+                                      onPressed: () {
+                                        provider.removeStock(stock.symbol);
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(
+                                              '${stock.name} removed from Watchlist'),
+                                        ));
+                                      },
+                                    ),
+                                  // Expand button
+                                  IconButton(
+                                    icon: Icon(
+                                      provider.isExpanded(index)
+                                          ? Icons.expand_less
+                                          : Icons.expand_more,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      provider.toggleExpansion(index);
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -96,27 +110,19 @@ class WatchlistScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Divider(),
-                                _buildDetailRow('Region', stock.region, Icons.public),
-                                _buildDetailRow('Market Open', stock.marketOpen, Icons.access_time),
-                                _buildDetailRow('Market Close', stock.marketClose, Icons.access_time),
-                                _buildDetailRow('Timezone', stock.timezone, Icons.timer),
-                                _buildDetailRow('Currency', stock.currency, Icons.monetization_on),
-                                _buildDetailRow('Match Score', stock.matchScore.toString(), Icons.star),
+                                _buildDetailRow(
+                                    'Region', stock.region, Icons.public),
+                                _buildDetailRow('Market Open', stock.marketOpen,
+                                    Icons.access_time),
+                                _buildDetailRow('Market Close',
+                                    stock.marketClose, Icons.access_time),
+                                _buildDetailRow(
+                                    'Timezone', stock.timezone, Icons.timer),
+                                _buildDetailRow('Currency', stock.currency,
+                                    Icons.monetization_on),
+                                _buildDetailRow('Match Score',
+                                    stock.matchScore.toString(), Icons.star),
                                 SizedBox(height: 8),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.delete, color: Colors.red),
-                                      onPressed: () {
-                                        provider.removeStock(stock.symbol);  // Remove stock from watchlist
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                          content: Text('${stock.name} removed from Watchlist'),
-                                        ));
-                                      },
-                                    ),
-                                  ],
-                                ),
                               ],
                             ),
                             crossFadeState: provider.isExpanded(index)
@@ -146,15 +152,20 @@ class WatchlistScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 16, color: Colors.grey[600]),
+              Icon(icon,
+                  size: 16, color: const Color.fromARGB(255, 223, 223, 223)),
               SizedBox(width: 4),
               Text(
                 title,
-                style: TextStyle(color: Colors.grey[600]),
+                style:
+                    TextStyle(color: const Color.fromARGB(255, 221, 221, 221)),
               ),
             ],
           ),
-          Text(value),
+          Text(
+            value,
+            style: TextStyle(color: Colors.white),
+          ),
         ],
       ),
     );

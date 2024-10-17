@@ -31,15 +31,28 @@ class WatchlistProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // void removeStock(String symbol) {
+  //   final index = _watchlist.indexWhere((stock) => stock.symbol == symbol);
+  //   if (index != -1) {
+  //     _watchlistBox.delete(symbol);
+  //     _watchlist.removeAt(index);
+  //     _expandedStates.removeAt(index);
+  //     notifyListeners();
+  //   }
+  // }
+
   void removeStock(String symbol) {
-    final index = _watchlist.indexWhere((stock) => stock.symbol == symbol);
-    if (index != -1) {
-      _watchlistBox.delete(symbol);
-      _watchlist.removeAt(index);
-      _expandedStates.removeAt(index);
-      notifyListeners();
-    }
+  // Reset all expanded states before removing the stock
+  _expandedStates = List<bool>.filled(_watchlist.length, false); 
+  
+  final index = _watchlist.indexWhere((stock) => stock.symbol == symbol);
+  if (index != -1) {
+    _watchlistBox.delete(symbol); // Remove from Hive
+    _watchlist.removeAt(index); // Remove from the local list
+    _expandedStates.removeAt(index); // Remove the expansion state as well
+    notifyListeners();
   }
+}
 
   void toggleExpansion(int index) {
     if (index < _expandedStates.length) {
