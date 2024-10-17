@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class WishlistScreen extends StatelessWidget {
-  const WishlistScreen({super.key});
+class WatchlistScreen extends StatelessWidget {
+  const WatchlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class WishlistScreen extends StatelessWidget {
         // backgroundColor: Colors.black,
         appBar: AppBar(
           title: const Text(
-            'Wishlist',
+            'watchlist',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

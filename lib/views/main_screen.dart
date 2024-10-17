@@ -2,7 +2,7 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stox/views/home_screen.dart';
-import 'package:stox/views/wishlist_screen.dart';
+import 'package:stox/views/watchlist_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   final PageController _pageController =
       PageController(); // Controller for PageView
 
-  final List<Widget> _screens = [const HomeScreen(), const WishlistScreen()];
+  final List<Widget> _screens = [const HomeScreen(), const WatchlistScreen()];
 
   void _onTapped(int index) {
     setState(() {
@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           FlashyTabBarItem(
             icon: const FaIcon(FontAwesomeIcons.clipboardList),
-            title: const Text('Wishlist'),
+            title: const Text('Watchlist'),
           ),
         ],
         onItemSelected: _onTapped,
