@@ -13,18 +13,43 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  final PageController _pageController =
+      PageController(); // Controller for PageView
 
   final List<Widget> _screens = [const HomeScreen(), const WishlistScreen()];
+
   void _onTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+    _pageController.animateToPage(
+      index,
+      duration:
+          const Duration(milliseconds: 300), // Duration for smooth animation
+      curve: Curves.easeInOut, // Smooth curve for transition
+    );
+  }
+
+  @override
+  void dispose() {
+    _pageController
+        .dispose(); // Dispose the controller when the screen is closed
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        physics: const PageScrollPhysics(),
+        children: _screens, // Disable swiping between tabs
+      ),
       bottomNavigationBar: FlashyTabBar(
         items: [
           FlashyTabBarItem(

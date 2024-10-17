@@ -11,7 +11,9 @@ class HomeScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(180),
         child: SappBar(),
       ),
-      body: Center(),
+      body: Center(
+        child: Text('Home Page'),
+      ),
     );
   }
 }
