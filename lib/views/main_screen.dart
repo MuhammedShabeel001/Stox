@@ -13,10 +13,9 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  final PageController _pageController =
-      PageController(); // Controller for PageView
+  final PageController _pageController = PageController();
 
-  final List<Widget> _screens = [const HomeScreen(), const WatchlistScreen()];
+  final List<Widget> _screens = [const HomeScreen(),  WatchlistScreen()];
 
   void _onTapped(int index) {
     setState(() {
@@ -24,16 +23,14 @@ class _MainScreenState extends State<MainScreen> {
     });
     _pageController.animateToPage(
       index,
-      duration:
-          const Duration(milliseconds: 300), // Duration for smooth animation
-      curve: Curves.easeInOut, // Smooth curve for transition
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
     );
   }
 
   @override
   void dispose() {
-    _pageController
-        .dispose(); // Dispose the controller when the screen is closed
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -48,17 +45,29 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         physics: const PageScrollPhysics(),
-        children: _screens, // Disable swiping between tabs
+        children: _screens,
       ),
       bottomNavigationBar: FlashyTabBar(
         items: [
           FlashyTabBarItem(
-            icon: const FaIcon(FontAwesomeIcons.house),
-            title: const Text('Home'),
+            icon: const FaIcon(
+              FontAwesomeIcons.house,
+              color: Colors.black,
+            ),
+            title: const Text(
+              'Home',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
           FlashyTabBarItem(
-            icon: const FaIcon(FontAwesomeIcons.clipboardList),
-            title: const Text('Watchlist'),
+            icon: const FaIcon(
+              FontAwesomeIcons.clipboardList,
+              color: Colors.black,
+            ),
+            title: const Text(
+              'Watchlist',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ],
         onItemSelected: _onTapped,

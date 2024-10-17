@@ -36,7 +36,7 @@ class SappBar extends StatelessWidget {
               child: const TextField(
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
-                  hintText: "Search...",
+                  hintText: "Search",
                   hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
                   border: InputBorder.none,
                   contentPadding:
