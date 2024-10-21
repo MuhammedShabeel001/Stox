@@ -1,2 +1,2 @@
-const String apiKey = 'XWWE2G4CO0H6W5GR';
+const String apiKey = 'G64KERB40SXEBRYS';
 const String baseUrl = 'https://www.alphavantage.co/query';
